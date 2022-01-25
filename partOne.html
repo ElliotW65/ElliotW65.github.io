@@ -44,15 +44,26 @@
             if(i < 6) {
                 newDiv.classed("firstFive", true);
                 newDiv.text(i);
+                newDiv.style("color", "red");
             }
             else {
                 newDiv.classed("secondFive", true);
                 newDiv.text(i);
+                newDiv.style("color", "green");
             }
         }
 
-        d3.selectAll(".firstFive").style("color", "red")
-        d3.selectAll(".secondFive").style("color", "green")
+        //d3.selectAll(".firstFive").style("color", "red");
+        //d3.selectAll(".secondFive").style("color", "green");
+
+        // Exercise 4
+        d3.select("div").text("Start");
+        d3.select("div").style("color", "purple");
+        
+        // Exercise 5
+        d3.select("body").append("div").text("Hello World!").style("color", "green");
+
+
 
     </script>
 
