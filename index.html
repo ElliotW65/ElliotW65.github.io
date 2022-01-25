@@ -3,18 +3,56 @@
 
 <head>
     <script src='https://d3js.org/d3.v7.min.js'></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <p>First paragraph</p>
-    <p>Second paragraph</p>
+    <p id="p1">First paragraph</p>
+    <p id="p2">Second paragraph</p>
 
     <script>
         // Exercise 1: Display version number in console
         console.log('d3.version:', d3.version);
 
+        // Exercise 2
+        // Selecting the first paragraph
         d3.select("p").style("color", "red");
+        d3.select("p").style("font-size", "100px");
+        d3.select("p").style("line-height", "20px");
+        d3.select("p").text("Data Visualisation Lab 1");
+        
+        // Selecting first paragraph by id
+        d3.select("#p1").style("font-weight", "bold");
+
+        // Add style to all paragraphs
+        d3.selectAll("p").style("font-family", "Roboto");
+
+        // Style paragraph 2 using id #p2
+        d3.select("#p2").style("font-size", "50px");
+        d3.select("#p2").text("Getting started with D3");
+
+        // Add class to all "p"s on the fly so they can be referenced by class
+        d3.selectAll("p").classed("paragraph", true);
+
+        // Exercise 3
+        for (let i = 1; i < 11; i++) {
+            console.log("in loop: " + i);
+            let newDiv = d3.select("body").append("div")
+            if(i < 6) {
+                newDiv.classed("firstFive", true);
+                newDiv.text(i);
+            }
+            else {
+                newDiv.classed("secondFive", true);
+                newDiv.text(i);
+            }
+        }
+
+        d3.selectAll(".firstFive").style("color", "red")
+        d3.selectAll(".secondFive").style("color", "green")
 
     </script>
 
