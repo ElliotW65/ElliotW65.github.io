@@ -62,6 +62,22 @@
         // Exercise 5
         d3.select("body").append("div").text("Hello World!").style("color", "green");
 
+        let otherdata = [ {name:'test', val:1}, 
+                        {name:'other', val:2},
+                        {name:'b', val:3} ];
+
+        let paragraph = d3.select("body")
+                        .selectAll("div")
+                        .data(otherdata)
+                        .text(function (d, i) {
+                            console.log("d.name: " + d.name);
+                            console.log("d.val: " + d.val);
+                            console.log("i: " + i);
+                            console.log("this: " + this);
+                            return 'cont:' + d.name; // return value is used to set the 'text'
+                        });
+
+
 
     </script>
 
