@@ -1,0 +1,3 @@
+Shape,Height,Width,x,y,fill
+svg,400,400,,,
+rect,100,200,0,0,pink
