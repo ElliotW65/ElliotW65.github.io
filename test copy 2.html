@@ -37,13 +37,39 @@
                     .attr("width", element.Width)
                     .attr("height", element.Height)
                     .attr("fill", element.fill);
-/*                     newsvg.append(element.Shape)
-                    .attr("x", element.x)
-                    .attr("y", element.y)
-                    .attr("width", element.Width)
-                    .attr("height", element.Height)
-                    .attr("fill", element.fill); */
-            }
+
+                }
+                else if(element.Shape == "circle") {
+                    console.log("Circle");
+                    newsvg.selectAll(element.Shape)
+                    .data(data)
+                    .enter()
+                    .append(element.Shape)
+                    .attr("cx", element.x)
+                    .attr("cy", element.y)
+                    .attr("r", element.rx);
+                }
+                else if(element.Shape == "ellipse") {
+                    newsvg.selectAll(element.Shape)
+                    .data(data)
+                    .enter()
+                    .append(element.Shape)
+                    .attr("cx", element.x)
+                    .attr("cy", element.y)
+                    .attr("rx", element.rx)
+                    .attr("ry", element.ry);
+                }
+                else if(element.Shape == "line") {
+                    newsvg.selectAll(element.Shape)
+                    .data(data)
+                    .enter()
+                    .append(element.Shape)
+                    .attr("x1", element.x)
+                    .attr("x2", element.y)
+                    .attr("y1",element.rx)
+                    .attr("y2",element.ry)
+                    .attr("stroke", element.fill)
+                }
             });      
         });
     </script>
