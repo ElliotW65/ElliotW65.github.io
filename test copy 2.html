@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src='https://d3js.org/d3.v7.min.js'></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div></div>
+
+    <script>
+
+        var newsvg = d3.select("body")
+        .append("svg")
+        .attr("width", 400)
+        .attr("height", 400)
+        .style("border", '1px solid green');
+        
+        var file = 'exercise_eleven.csv'
+
+        // Exercise 12
+        d3.csv(file).then(function(data) {
+            data.forEach(element => {
+                console.log(element.Shape);
+                if(element.Shape == "rect") {
+                    console.log(element.Shape);
+                    newsvg.selectAll(element.Shape)
+                    .data(data)
+                    .enter()
+                    .append(element.Shape)
+                    .attr("x", element.x)
+                    .attr("y", element.y)
+                    .attr("width", element.Width)
+                    .attr("height", element.Height)
+                    .attr("fill", element.fill);
+/*                     newsvg.append(element.Shape)
+                    .attr("x", element.x)
+                    .attr("y", element.y)
+                    .attr("width", element.Width)
+                    .attr("height", element.Height)
+                    .attr("fill", element.fill); */
+            }
+            });      
+        });
+    </script>
+       
+
+</body>
+
+</html>

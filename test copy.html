@@ -24,13 +24,26 @@
 
         // Exercise 12
         d3.csv(file).then(function(data) {         
-            console.log("finished")
             d3.select("body")
-            .selectAll("p")
+            .selectAll("span")
             .data(data)
             .enter()
             .append('p')
-            .text("working");
+            .text(function (d, i) {
+                return d;
+            })
+            .style('color', function(d, i) {
+                console.log(typeof d);
+                if(typeof d == 'number') {
+                    return 'green';
+                }
+                else if(typeof d == 'string') {
+                    return 'blue';
+                }
+                else {
+                    return 'black';
+                }
+            });
         });
     </script>
        
