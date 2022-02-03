@@ -45,48 +45,104 @@
             .attr("stroke", "purple")
 
 
-        var newsvg = d3.select("body")
+        var exTwelve = d3.select("body")
             .append("svg")
             .attr("width", 400)
             .attr("height", 400)
             .style("border", '1px solid green');
+
         var file = 'exercise_eleven.csv'
 
         // Exercise 12
-        d3.csv(file, function(data) {
+        d3.csv(file).then(function(data) {
+            data.forEach(element => {
+                console.log(element.Shape);
+                if(element.Shape == "rect") {
+                    exTwelve.append(element.Shape)
+                    .attr("x", element.x)
+                    .attr("y", element.y)
+                    .attr("width", element.Width)
+                    .attr("height", element.Height)
+                    .attr("fill", element.fill);
 
-            if(data.Shape == "rect") {
-                newsvg.append(data.Shape)
-                .attr("x", data.x)
-                .attr("y", data.y)
-                .attr("width", data.Width)
-                .attr("height", data.Height)
-                .attr("fill", data.fill);
-            }
-            else if(data.Shape == "circle") {
-                console.log("Circle");
-                newsvg.append(data.Shape)
-                .attr("cx", data.x)
-                .attr("cy", data.y)
-                .attr("r", data.rx);
-            }
-            else if(data.Shape == "ellipse") {
-                newsvg.append(data.Shape)
-                .attr("cx", data.x)
-                .attr("cy", data.y)
-                .attr("rx", data.rx)
-                .attr("ry", data.ry);
-            }
-            else if(data.Shape == "line") {
-                newsvg.append(data.Shape)
-                .attr("x1", data.x)
-                .attr("x2", data.y)
-                .attr("y1",data.rx)
-                .attr("y2",data.ry)
-                .attr("stroke", data.fill)
-            }
-                
+                }
+                else if(element.Shape == "circle") {
+                    exTwelve.append(element.Shape)
+                    .attr("cx", element.x)
+                    .attr("cy", element.y)
+                    .attr("r", element.rx);
+                }
+                else if(element.Shape == "ellipse") {
+                    exTwelve.append(element.Shape)
+                    .attr("cx", element.x)
+                    .attr("cy", element.y)
+                    .attr("rx", element.rx)
+                    .attr("ry", element.ry);
+                }
+                else if(element.Shape == "line") {
+                    exTwelve.append(element.Shape)
+                    .attr("x1", element.x)
+                    .attr("x2", element.y)
+                    .attr("y1",element.rx)
+                    .attr("y2",element.ry)
+                    .attr("stroke", element.fill)
+                }
+            });      
+        });
 
+        var exThirteen = d3.select("body")
+            .append("svg")
+            .attr("width", 400)
+            .attr("height", 400)
+            .style("border", '1px solid green');
+
+        // Exercise 13
+        d3.csv(file).then(function(data) {
+            data.forEach(element => {
+                console.log(element.Shape);
+                if(element.Shape == "rect") {
+                    exThirteen.selectAll(element.Shape)
+                    .data(data)
+                    .enter()
+                    .append(element.Shape)
+                    .attr("x", element.x)
+                    .attr("y", element.y)
+                    .attr("width", element.Width)
+                    .attr("height", element.Height)
+                    .attr("fill", element.fill);
+
+                }
+                else if(element.Shape == "circle") {
+                    exThirteen.selectAll(element.Shape)
+                    .data(data)
+                    .enter()
+                    .append(element.Shape)
+                    .attr("cx", element.x)
+                    .attr("cy", element.y)
+                    .attr("r", element.rx);
+                }
+                else if(element.Shape == "ellipse") {
+                    exThirteen.selectAll(element.Shape)
+                    .data(data)
+                    .enter()
+                    .append(element.Shape)
+                    .attr("cx", element.x)
+                    .attr("cy", element.y)
+                    .attr("rx", element.rx)
+                    .attr("ry", element.ry);
+                }
+                else if(element.Shape == "line") {
+                    exThirteen.selectAll(element.Shape)
+                    .data(data)
+                    .enter()
+                    .append(element.Shape)
+                    .attr("x1", element.x)
+                    .attr("x2", element.y)
+                    .attr("y1",element.rx)
+                    .attr("y2",element.ry)
+                    .attr("stroke", element.fill)
+                }
+            });      
         });
     </script>
        
