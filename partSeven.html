@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src='https://d3js.org/d3.v7.min.js'></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <style>
+/*         svg rect {
+            fill: blue;
+        } */
+        svg text {
+            fill:white;
+            font: 10px sans-serif;
+            text-anchor: end;
+        }
+        </style>
+        <script>
+
+            //Exercise 14
+            let heartfailurecsv = 'https://raw.githubusercontent.com/akmand/datasets/master/heart_failure.csv';
+
+            var width = 200;
+            var scaleFactor = 5;
+            var barHeight = 20;
+
+            d3.csv(heartfailurecsv).then(function(data) {
+                console.log(data);
+
+                const ages = {
+                    31: 0,
+                    41: 0,
+                    61: 0,
+                    101: 0
+                };
+
+                data.forEach(element => {
+                    for(const i in ages) {
+                        if(element.age < i) {
+                            ages[i] += 1;
+                        }
+                    };
+                });
+
+                var graph = d3.select("body")
+                    .append("svg")
+                    .attr("width", 1000)
+                    .attr("height", barHeight * 4);
+
+                var bar = graph.selectAll("g")
+                    .data(Object.keys(ages))
+                    .enter()
+                    .append("g")
+                    .attr("transform", function(d, i) {
+                        return "translate(0," + i * barHeight + ")";
+                });
+                bar.append("rect")
+                    .attr("width", function(d,i) {
+                        console.log(ages[d] * scaleFactor);
+                        return ages[d] * scaleFactor;
+                    })
+                    .attr("fill", function(d) {
+                        if (ages[d] > 99) {
+                            return "red";
+                        } else if (ages[d] > 50) {
+                            return "orange";
+                        }
+                            return "green";
+                            
+                    })
+                    .attr("height", barHeight - 1);
+                
+                bar.append("text")
+                    .attr("x", function(d) { return (ages[d] * scaleFactor)})
+                    .attr("y", barHeight / 2)
+                    .attr("dy", ".35em")
+                    .attr("text-anchor", "middle")
+                    .text(function(d) { console.log(ages[d]); return ages[d]; });
+                
+            });
+
+        </script>
+
+</body>
+
+</html>
+
