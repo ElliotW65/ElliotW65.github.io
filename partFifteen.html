@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src='https://d3js.org/d3.v7.min.js'></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <script>
+        var data = [3, 4, 8, 12,4 ,20, 10, 1, 1, 2,13,11];
+        const xSize = 400; const ySize = 400;
+        const margin = 40;
+        const xMax = xSize - margin*2;
+        const yMax = ySize - margin*2;
+        // Append SVG Object to the Page
+        const svg = d3.select("body")
+         .append("svg")
+         .attr('width', xSize )
+         .attr('height', ySize )
+         .append("g")
+         .attr("transform","translate(" + xSize/2 + "," + ySize/2 + ")");
+        const radius = Math.min(xSize, ySize) / 2;
+        var color = d3.scaleLinear().domain([1,20]).range(["white", "red"]);
+        // Generate the pie
+        var pie = d3.pie();
+        // Generate the arcs
+        var arc = d3.arc()
+         .innerRadius(0)
+         .outerRadius(radius);
+        //Generate groups
+        var arcs = svg.selectAll("arc")
+         .data(pie(data))
+         .enter()
+         .append("g")
+         .attr("class", "arc")
+        //Draw arc paths
+        arcs.append("path")
+         .attr("fill", function(d, i) {
+            return color(d.data);
+         })
+         .attr("d", arc);
+
+         arcs.select("g")
+            .data(pie(data))
+            .enter()
+            //.filter(function(d, i) { return i % 10 == 0 })
+            .append("text")
+            .attr("transform", function(d, i) { return "translate(" + arc.centroid(d, i) + ")"; })
+            .text(function(d) {return d.data});
+    </script>
+
+</body>
+
+</html>
