@@ -11,6 +11,7 @@
 <body>
 
     <script>
+        // Exercise 30
         var data = [3, 4, 8, 12,4 ,20, 10, 1, 1, 2,13,11];
         const xSize = 400; const ySize = 400;
         const margin = 40;
@@ -24,6 +25,7 @@
          .append("g")
          .attr("transform","translate(" + xSize/2 + "," + ySize/2 + ")");
         const radius = Math.min(xSize, ySize) / 2;
+        //Changed colour scale to white to red range to acomodate more segments.
         var color = d3.scaleLinear().domain([1,20]).range(["white", "red"]);
         // Generate the pie
         var pie = d3.pie();
@@ -44,10 +46,10 @@
          })
          .attr("d", arc);
 
+         // Exercise 31
          arcs.select("g")
             .data(pie(data))
             .enter()
-            //.filter(function(d, i) { return i % 10 == 0 })
             .append("text")
             .attr("transform", function(d, i) { return "translate(" + arc.centroid(d, i) + ")"; })
             .text(function(d) {return d.data});
