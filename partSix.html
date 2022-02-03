@@ -103,44 +103,72 @@
                 if(element.Shape == "rect") {
                     exThirteen.selectAll(element.Shape)
                     .data(data)
-                    .enter()
-                    .append(element.Shape)
-                    .attr("x", element.x)
-                    .attr("y", element.y)
-                    .attr("width", element.Width)
-                    .attr("height", element.Height)
-                    .attr("fill", element.fill);
+                    .join(
+                        enter => {
+                            enter.append(element.Shape)
+                            .attr("x", element.x)
+                            .attr("y", element.y)
+                            .attr("width", element.Width)
+                            .attr("height", element.Height)
+                            .attr("fill", element.fill);
+                        },
+                        exit => {
+                            console.log("Exit called");
+                            exit.remove();
+                        }
+                    )
 
                 }
                 else if(element.Shape == "circle") {
                     exThirteen.selectAll(element.Shape)
                     .data(data)
-                    .enter()
-                    .append(element.Shape)
-                    .attr("cx", element.x)
-                    .attr("cy", element.y)
-                    .attr("r", element.rx);
+                    .join(
+                        enter => {
+                            enter.append(element.Shape)
+                            .attr("cx", element.x)
+                            .attr("cy", element.y)
+                            .attr("r", element.rx);
+                        },
+                        exit => {
+                            console.log("Exit called");
+                            exit.remove();
+                        }
+                    )
                 }
                 else if(element.Shape == "ellipse") {
                     exThirteen.selectAll(element.Shape)
                     .data(data)
-                    .enter()
-                    .append(element.Shape)
-                    .attr("cx", element.x)
-                    .attr("cy", element.y)
-                    .attr("rx", element.rx)
-                    .attr("ry", element.ry);
+                    .join(
+                        enter => {
+                            enter.append(element.Shape)
+                            .attr("cx", element.x)
+                            .attr("cy", element.y)
+                            .attr("rx", element.rx)
+                            .attr("ry", element.ry);
+                        },
+                        exit => {
+                            console.log("Exit called");
+                            exit.remove();
+                        }
+                    )
                 }
                 else if(element.Shape == "line") {
                     exThirteen.selectAll(element.Shape)
                     .data(data)
-                    .enter()
-                    .append(element.Shape)
-                    .attr("x1", element.x)
-                    .attr("x2", element.y)
-                    .attr("y1",element.rx)
-                    .attr("y2",element.ry)
-                    .attr("stroke", element.fill)
+                    .join(
+                        enter => {
+                            enter.append(element.Shape)
+                            .attr("x1", element.x)
+                            .attr("x2", element.y)
+                            .attr("y1",element.rx)
+                            .attr("y2",element.ry)
+                            .attr("stroke", element.fill);
+                        },
+                        exit => {
+                            console.log("Exit called");
+                            exit.remove();
+                        }
+                    )
                 }
             });      
         });
