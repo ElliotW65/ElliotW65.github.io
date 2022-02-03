@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src='https://d3js.org/d3.v7.min.js'></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <script>
+
+        const file = "exercise_eighteen.csv";
+
+        function barChart(fileName) {
+            
+            const data = [50, 400, 300, 900, 250, 1000]
+            const width = 500;
+            const barHeight = 20;
+            const margin = 1;
+
+            // Exercise 18
+            d3.csv(fileName).then(function(data) {
+                console.log(data);
+
+                dataArr = [];
+
+                for(i of data){
+                    dataArr.push(+i.Value);
+                }
+
+                console.log(dataArr);
+
+                var scale = d3.scaleLinear()
+                .domain([d3.min(dataArr), d3.max(dataArr)])
+                .range([50, 500]);
+                var svg = d3.select("body")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", barHeight * dataArr.length);
+                var g = svg.selectAll("g")
+                .data(dataArr)
+                .enter()
+                .append("g")
+                .attr("transform", function (d, i) {
+                    return "translate(0," + i * barHeight + ")";
+                });
+                g.append("rect")
+                .attr("width", function (d) {
+                    return scale(d);
+                })
+                //Exercise 17
+                .attr("fill", function(d) {
+                    
+                    if (d > 500) {
+                        return "red";
+                    } else if (d < 100) {
+                        return "green";
+                    }
+                    else {
+                        return "blue"
+                    }
+                        
+                })
+                .attr("height", barHeight - margin)
+                g.append("text")
+                .attr("x", function (d) { return (scale(d)); })
+                .attr("y", barHeight / 2)
+                .attr("dy", ".35em")
+                .style('text-anchor', 'end')
+                .text(function (d) { return d; });
+            });
+
+        }
+
+        barChart(file);
+        barChart("exercise_eighteenb.csv");
+
+    </script>
+
+</body>
+
+</html>

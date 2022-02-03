@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src='https://d3js.org/d3.v7.min.js'></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <script>
+        const width = 400;
+        const height = 300;
+        var data = [10, 15, 20, 25, 30];
+        var svg = d3.select("body")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+        var xscale = d3.scaleLinear()
+        .domain([0, d3.max(data)])
+        .range([0, width - 100]);
+        var yscale = d3.scaleLinear()
+        .domain([0, d3.max(data)])
+        .range([height/2, 0]);
+        var x_axis = d3.axisBottom()
+        .scale(xscale);
+        var y_axis = d3.axisLeft()
+        .scale(yscale);
+        var xTop_axis = d3.axisTop()
+        .scale(xscale);
+        var yRight_axis = d3.axisRight()
+        .scale(yscale);
+        svg.append("g")
+        .attr("transform", "translate(50, 10)")
+        .call(y_axis);
+        var xAxisTranslate = height/2 + 10;
+        svg.append("g")
+        .attr("transform", "translate(50, " + xAxisTranslate +")")
+        .call(x_axis)
+        svg.append("g")
+        .attr("transform", "translate(50, " + 20 +")")
+        .classed("altAxis", true)
+        .call(xTop_axis)
+        svg.append("g")
+        .attr("transform", "translate("+(width-50)+", 10)")
+        .classed("altAxis", true)
+        .call(yRight_axis);
+
+        svg.selectAll(".altAxis")
+        .attr("stroke","blue")
+        svg.selectAll(".altAxis")
+        .selectAll("line")
+        .attr("stroke","blue")
+
+
+    </script>
+
+</body>
+
+</html>
