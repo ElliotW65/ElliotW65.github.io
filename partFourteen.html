@@ -44,13 +44,15 @@
                 .append("svg")
                 .attr("width", width)
                 .attr("height", barHeight * dataArr.length);
+
                 // Exercise 32
                 svg.append("svg:image")
-                //.attr("xlink:href", "fruit-g6eb75822c_1920.png")
+                .attr("xlink:href", "fruit-g6eb75822c_1920.png")
                 .attr("width", 500)
                 .attr("height", 120)
                 .attr("x", 0)
                 .attr("y",0);
+
                 var g = svg.selectAll("g")
                 .data(dataArr)
                 .enter()

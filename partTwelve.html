@@ -60,7 +60,8 @@
         .attr("transform", `translate(${yMax},0)`)
         .call(d3.axisRight(y));
 
-        function waveGenerator(data, colour, pointShape) {
+        // Exercise 22
+        function waveGenerator(data, colour) {
 
             // Add the line
             svg.append("path")
