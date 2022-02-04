@@ -17,7 +17,7 @@
         function barChart(fileName) {
             
             const data = [50, 400, 300, 900, 250, 1000]
-            const width = 500;
+            const width = 800;
             const barHeight = 20;
             const margin = 1;
 
@@ -39,13 +39,28 @@
                 var svg = d3.select("body")
                 .append("svg")
                 .attr("width", width)
-                .attr("height", barHeight * dataArr.length);
+                .attr("height", barHeight * dataArr.length+50)
+                .attr("transform", "translate(10, " + 10 +")");
+
+
+                // Exercise 21
+                var xscale = d3.scaleLinear()
+                .domain([0, d3.max(dataArr)])
+                .range([0, scale(d3.max(dataArr))]);
+                var x_axis = d3.axisBottom()
+                .scale(xscale);
+
+                console.log(d3.max(dataArr));
+
+                var xAxisTranslate = barHeight * dataArr.length + 10;
+                
+
                 var g = svg.selectAll("g")
                 .data(dataArr)
                 .enter()
                 .append("g")
                 .attr("transform", function (d, i) {
-                    return "translate(0," + i * barHeight + ")";
+                    return "translate(15," + i * barHeight + ")";
                 });
                 g.append("rect")
                 .attr("width", function (d) {
@@ -71,6 +86,10 @@
                 .attr("dy", ".35em")
                 .style('text-anchor', 'end')
                 .text(function (d) { return d; });
+
+                svg.append("g")
+                .attr("transform", "translate(15, " + xAxisTranslate +")")
+                .call(x_axis)
             });
 
         }
